@@ -1,0 +1,16 @@
+﻿@model PsychologyConsultation.Domain.Entities.Paciente
+
+@{
+    ViewData["Title"] = "Detalles del Paciente";
+}
+
+<h1>Detalles del Paciente</h1>
+
+<div>
+    <h4>@Model.Nombre @Model.Apellido</h4>
+    <p><strong>Fecha de Nacimiento:</strong> @Model.FechaNacimiento?.ToString("dd/MM/yyyy")</p>
+    <p><strong>Teléfono:</strong> @Model.Telefono</p>
+    <p><strong>Email:</strong> @Model.Email</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>

@@ -1,0 +1,25 @@
+﻿@model PsychologyConsultation.Domain.Entities.SeccionSeguimiento
+
+<h1>Eliminar Sección de Seguimiento</h1>
+
+<p>¿Está seguro de que desea eliminar esta sección?</p>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Fecha</dt>
+        <dd class="col-sm-10">@Model.Fecha?.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-2">Observaciones</dt>
+        <dd class="col-sm-10">@Model.Observaciones</dd>
+
+        <dt class="col-sm-2">Completada</dt>
+        <dd class="col-sm-10">@(Model.Completada == true ? "Sí" : "No")</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input asp-for="Id" type="hidden" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+</form>
+
+<a href="@Url.Action("Index", "SeccionSeguimiento")" class="btn btn-secondary">Cancelar</a>

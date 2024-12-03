@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PsychologyConsultation.Domain.Entities.Consulta>
+
+@{
+    ViewData["Title"] = "Lista de Consultas";
+}
+
+<div class="text-center" style="background-color: #F3E5F5; padding: 50px; border-radius: 10px;">
+    <!-- Title -->
+    <h1 class="titulo" style="color: #6A1B9A; font-family: 'Georgia', serif;">Lista De Consultas</h1>
+</div>
+
+<!-- Image below the title -->
+<div class="text-center" style="margin-top: 20px;">
+    <img src="https://psiconcienciaonline.com/wp-content/uploads/2022/01/terapia-online_2.jpg"
+         alt="Consulta Image" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px;">
+</div>
+
+<div class="container mt-4">
+    <!-- Button to Create New Consulta with Strong Purple -->
+    <p class="text-right">
+        <a asp-action="Create" class="btn btn-primary" style="background-color: #6A1B9A; border-color: #6A1B9A; color: white; font-weight: bold;">Crear Nueva Consulta</a>
+    </p>
+
+    <!-- Consulta Table -->
+    <table class="table table-bordered table-hover">
+        <thead style="background-color: #6A1B9A; color: white;">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Detalles</th>
+                <th>Estado</th>
+                <th>Paciente</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var consulta in Model)
+            {
+                <tr style="background-color: #f9f9f9;">
+                    <td>@consulta.Id</td>
+                    <td>@consulta.Fecha?.ToString("dd/MM/yyyy")</td>
+                    <td>@consulta.Detalles</td>
+                    <td>@consulta.Estado</td>
+                    <td>@consulta.Paciente?.Nombre @consulta.Paciente?.Apellido</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Consulta", new { id = consulta.Id })" class="btn btn-warning">Edit</a>
+                        <a href="@Url.Action("Details", "Consulta", new { id = consulta.Id })" class="btn btn-info">Details</a>
+                        <a href="@Url.Action("Delete", "Consulta", new { id = consulta.Id })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .titulo {
+        font-size: 3rem;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    table tr:hover {
+        background-color: #e7e7e7;
+    }
+</style>

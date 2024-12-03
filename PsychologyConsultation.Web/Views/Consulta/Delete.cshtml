@@ -1,0 +1,28 @@
+﻿@model PsychologyConsultation.Domain.Entities.Consulta
+
+@{
+    ViewData["Title"] = "Eliminar Consulta";
+}
+
+<h1>¿Estás seguro de que deseas eliminar esta consulta?</h1>
+
+<div>
+    <h4>Consulta</h4>
+    <div>
+        <strong>Fecha:</strong> @Model.Fecha?.ToString("dd/MM/yyyy")
+    </div>
+    <div>
+        <strong>Detalles:</strong> @Model.Detalles
+    </div>
+    <div>
+        <strong>Estado:</strong> @Model.Estado
+    </div>
+    <div>
+        <strong>Paciente:</strong> @Model.Paciente?.Nombre @Model.Paciente?.Apellido
+    </div>
+</div>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="@Url.Action("Index", "Consulta")" class="btn btn-secondary">Cancelar</a>
+</form>

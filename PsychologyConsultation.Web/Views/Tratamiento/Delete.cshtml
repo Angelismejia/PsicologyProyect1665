@@ -1,0 +1,20 @@
+﻿@model PsychologyConsultation.Domain.Entities.Tratamiento
+
+@{
+    ViewData["Title"] = "Eliminar Tratamiento";
+}
+
+<h1>Eliminar Tratamiento</h1>
+
+<div class="alert alert-danger">
+    <p>¿Estás seguro que deseas eliminar este tratamiento?</p>
+</div>
+
+<h4>@Model.Nombre</h4>
+<p>@Model.Descripcion</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="@Url.Action("Index", "Tratamiento")" class="btn btn-secondary">Cancelar</a>
+</form>

@@ -1,0 +1,34 @@
+﻿@model PsychologyConsultation.Domain.Entities.Consulta
+@{
+    ViewData["Title"] = "Editar Consulta";
+}
+
+<h1>Editar Consulta</h1>
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label for="Fecha">Fecha</label>
+        <input type="date" class="form-control" id="Fecha" asp-for="Fecha" required />
+    </div>
+    <div class="form-group">
+        <label for="Detalles">Detalles</label>
+        <textarea class="form-control" id="Detalles" asp-for="Detalles" rows="4" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="Estado">Estado</label>
+        <select class="form-control" id="Estado" asp-for="Estado">
+            <option value="Pendiente" selected="@((Model.Estado == "Pendiente") ? "selected" : null)">Pendiente</option>
+            <option value="Completada" selected="@((Model.Estado == "Completada") ? "selected" : null)">Completada</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="PacienteId">Paciente</label>
+        <select class="form-control" id="PacienteId" asp-for="PacienteId">
+            @(ViewBag.Pacientes is List<PsychologyConsultation.Domain.Entities.Paciente> pacientes && pacientes.Any()
+                ? string.Join("", pacientes.Select(p => $"<option value='{p.Id}' {(p.Id == Model.PacienteId ? "selected" : null)}>{p.Nombre} {p.Apellido}</option>"))
+                : "<option value=''>No hay pacientes disponibles</option>")
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

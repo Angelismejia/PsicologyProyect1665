@@ -1,0 +1,72 @@
+﻿@model IEnumerable<PsychologyConsultation.Domain.Entities.SeccionSeguimiento>
+
+<!-- Image at the Top -->
+<div class="text-center" style="margin-bottom: 20px;">
+    <img src="https://th.bing.com/th/id/R.075343f239d3cb090bc0c6bdce74320c?rik=i9kgEcR192ChPQ&pid=ImgRaw&r=0"
+         alt="Imagen Principal" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px;">
+</div>
+
+<div class="text-center" style="background-color: #F3E5F5; padding: 50px; border-radius: 10px;">
+    <!-- Title -->
+    <h1 class="titulo" style="color: #6A1B9A; font-family: 'Georgia', serif;">Lista de Secciones de Seguimiento</h1>
+</div>
+
+<!-- Button to Create New Sección -->
+<div class="container mt-4">
+    <p class="text-right">
+        <a href="@Url.Action("Create", "SeccionSeguimiento")" class="btn btn-primary"
+           style="background-color: #6A1B9A; border-color: #6A1B9A; color: white; font-weight: bold;">Crear Nueva Sección</a>
+    </p>
+
+    <!-- Sección Seguimiento Table -->
+    <table class="table table-bordered table-hover">
+        <thead style="background-color: #6A1B9A; color: white;">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Observaciones</th>
+                <th>Completada</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="background-color: #f9f9f9;">
+                    <td>@item.Id</td>
+                    <td>@item.Fecha?.ToString("dd/MM/yyyy") ?? "Sin Fecha"</td>
+                    <td>@item.Observaciones ?? "Sin Observaciones"</td>
+                    <td>@(item.Completada == true ? "Sí" : "No")</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "SeccionSeguimiento", new { id = item.Id })" class="btn btn-warning">Editar</a>
+                        <a href="@Url.Action("Delete", "SeccionSeguimiento", new { id = item.Id })" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .titulo {
+        font-size: 3rem;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    table tr:hover {
+        background-color: #e7e7e7;
+    }
+</style>

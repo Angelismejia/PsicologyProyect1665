@@ -1,0 +1,74 @@
+﻿@model IEnumerable<PsychologyConsultation.Domain.Entities.Paciente>
+
+@{
+    ViewData["Title"] = "Lista de Pacientes";
+}
+
+<div class="text-center" style="background-color: #F3E5F5; padding: 50px; border-radius: 10px;">
+    <!-- Adding Image and Title -->
+    <img src="https://th.bing.com/th/id/R.4b69978c985a0315aa917c29299e4d71?rik=1pWRZSLfNVKoXA&pid=ImgRaw&r=0"
+         alt="Psychology Center Image" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">
+    <h1 class="titulo" style="color: #6A1B9A; font-family: 'Georgia', serif;">Lista de Pacientes</h1>
+</div>
+
+<div class="container mt-4">
+    <!-- Button to Create New Patient with Strong Purple -->
+    <p class="text-right">
+        <a asp-action="Create" class="btn btn-primary" style="background-color: #6A1B9A; border-color: #6A1B9A; color: white; font-weight: bold;">Crear Nuevo Paciente</a>
+    </p>
+
+    <!-- Patient Table -->
+    <table class="table table-bordered table-hover">
+        <thead style="background-color: #6A1B9A; color: white;">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var paciente in Model)
+            {
+                <tr style="background-color: #f9f9f9;">
+                    <td>@paciente.Nombre</td>
+                    <td>@paciente.Apellido</td>
+                    <td>@paciente.FechaNacimiento?.ToString("dd/MM/yyyy")</td>
+                    <td>@paciente.Telefono</td>
+                    <td>@paciente.Email</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@paciente.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="Details" asp-route-id="@paciente.Id" class="btn btn-info">Detalles</a>
+                        <a asp-action="Delete" asp-route-id="@paciente.Id" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .titulo {
+        font-size: 3rem;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    table tr:hover {
+        background-color: #e7e7e7;
+    }
+</style>

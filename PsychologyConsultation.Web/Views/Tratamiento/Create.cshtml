@@ -1,0 +1,20 @@
+﻿@model PsychologyConsultation.Domain.Entities.Tratamiento
+
+@{
+    ViewData["Title"] = "Crear Tratamiento";
+}
+
+<h1>Crear Nuevo Tratamiento</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="Nombre">Nombre</label>
+        <input type="text" class="form-control" id="Nombre" name="Nombre" required />
+    </div>
+    <div class="form-group">
+        <label for="Descripcion">Descripción</label>
+        <textarea class="form-control" id="Descripcion" name="Descripcion" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    <a href="@Url.Action("Index", "Tratamiento")" class="btn btn-secondary mt-3">Cancelar</a>
+</form>

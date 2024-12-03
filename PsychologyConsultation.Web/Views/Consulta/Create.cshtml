@@ -1,0 +1,39 @@
+﻿@model PsychologyConsultation.Domain.Entities.Consulta
+@{
+    ViewData["Title"] = "Create Consulta";
+}
+
+<h1>Create Consulta</h1>
+<form asp-action="Create">
+    <div class="form-group">
+        <label for="Fecha">Fecha</label>
+        <input asp-for="Fecha" class="form-control" type="date" id="Fecha" name="Fecha" required />
+        <span asp-validation-for="Fecha" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Detalles">Detalles</label>
+        <textarea asp-for="Detalles" class="form-control" id="Detalles" name="Detalles" required></textarea>
+        <span asp-validation-for="Detalles" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Estado">Estado</label>
+        <select asp-for="Estado" class="form-control" id="Estado" name="Estado" required>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Completada">Completada</option>
+        </select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="PacienteId">Paciente</label>
+        <select asp-for="PacienteId" class="form-control" id="PacienteId" name="PacienteId" required>
+            @(ViewBag.Pacientes is List<PsychologyConsultation.Domain.Entities.Paciente> pacientes && pacientes.Any()
+                ? string.Join("", pacientes.Select(p => $"<option value='{p.Id}'>{p.Nombre} {p.Apellido}</option>"))
+                : "<option value=''>No hay pacientes disponibles</option>")
+        </select>
+        <span asp-validation-for="PacienteId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+<div>
+    <a href="@Url.Action("Index", "Consulta")" class="btn btn-secondary">Back to List</a>
+</div>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<PsychologyConsultation.Domain.Entities.Tratamiento>
+
+@{
+    ViewData["Title"] = "Lista de Tratamientos";
+}
+
+<div class="text-center" style="background-color: #F3E5F5; padding: 50px; border-radius: 10px;">
+    <h1 class="titulo" style="color: #6A1B9A; font-family: 'Georgia', serif;">Lista de Tratamientos</h1>
+</div>
+
+<!-- Button to Create New Tratamiento -->
+<div class="container mt-4">
+    <p class="text-right">
+        <a href="@Url.Action("Create", "Tratamiento")" class="btn btn-primary" style="background-color: #6A1B9A; border-color: #6A1B9A; color: white; font-weight: bold;">Crear Nuevo Tratamiento</a>
+    </p>
+
+    <!-- Tratamiento Table -->
+    <table class="table table-bordered table-hover">
+        <thead style="background-color: #6A1B9A; color: white;">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tratamiento in Model)
+            {
+                <tr style="background-color: #f9f9f9;">
+                    <td>@tratamiento.Nombre</td>
+                    <td>@tratamiento.Descripcion</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Tratamiento", new { id = tratamiento.Id })" class="btn btn-info">Detalles</a>
+                        <a href="@Url.Action("Edit", "Tratamiento", new { id = tratamiento.Id })" class="btn btn-warning">Editar</a>
+                        <a href="@Url.Action("Delete", "Tratamiento", new { id = tratamiento.Id })" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Image Below Table -->
+    <div class="text-center" style="margin-top: 20px;">
+        <img src="https://ak6.picdn.net/shutterstock/videos/1028076416/thumb/1.jpg?ip=x480"
+             alt="Image Below Table" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px;">
+    </div>
+</div>
+
+<style>
+    .titulo {
+        font-size: 3rem;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    table tr:hover {
+        background-color: #e7e7e7;
+    }
+</style>

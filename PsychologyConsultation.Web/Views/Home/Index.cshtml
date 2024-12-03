@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Bienvenidos a Consulta Psicológica - Psychology Center";
+}
+
+<div class="text-center" style="background-color: #F3E5F5; padding: 50px; border-radius: 10px;">
+    <img src="https://i.pinimg.com/736x/aa/24/bd/aa24bd915d0660dc8a77c278a5fe1f56.jpg" alt="Decorative Psychology Center Image" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">
+    <h1 class="display-4 titulo" style="font-size: 4rem; font-family: 'Georgia', serif; color: #6A1B9A;">Bienvenidos a Psychology Center</h1>
+    <p class="subtitulo" style="color: black; font-size: 1.2rem; font-style: italic;">Tu salud mental es nuestra prioridad. Estamos aquí para acompañarte en cada paso de tu proceso de crecimiento personal y bienestar emocional.</p>
+</div>
+
+<div class="container" style="margin-top: 40px;">
+    <div class="row">
+        <div class="col-12 col-md-4 text-center card-container">
+            <h3 class="subtitulo">Registro de Pacientes</h3>
+            <p class="texto" style="font-style: italic;">Registra a tus pacientes de manera rápida y sencilla, manteniendo toda su información organizada y accesible.</p>
+            <a class="boton" asp-controller="Paciente" asp-action="Index">Más Información</a>
+        </div>
+        <div class="col-12 col-md-4 text-center card-container">
+            <h3 class="subtitulo">Programación de Consultas</h3>
+            <p class="texto" style="font-style: italic;">Agenda consultas con recordatorios automáticos para evitar olvidos y mejorar la puntualidad.</p>
+            <a class="boton" asp-controller="Consulta" asp-action="Index">Ver Detalles</a>
+        </div>
+        <div class="col-12 col-md-4 text-center card-container">
+            <h3 class="subtitulo">Seguimiento de Tratamientos</h3>
+            <p class="texto" style="font-style: italic;">Realiza un seguimiento detallado de los avances de cada paciente, ajustando los planes según sus necesidades.</p>
+            <a class="boton" asp-controller="SeccionSeguimiento" asp-action="Index">Descubre Más</a>
+        </div>
+    </div>
+</div>
+
+<!-- Objetivo de la Consulta Psicológica -->
+<div class="container" style="margin-top: 40px;">
+    <h3 class="subtitulo" style="color: #6A1B9A; font-size: 2rem; text-align: center;">Objetivo de la Consulta Psicológica</h3>
+    <p class="texto" style="font-size: 1.2rem; font-style: italic; text-align: center;">El objetivo principal de nuestras consultas psicológicas es ofrecer un espacio seguro y de apoyo donde los pacientes puedan explorar sus pensamientos, emociones y comportamientos. En Psychology Center, nos centramos en proporcionar un servicio integral de gestión de consultas psicológicas. Esto incluye el registro de pacientes, programación de citas, seguimiento de tratamientos y un módulo para gestionar el historial de cada paciente, asegurando un proceso terapéutico fluido y efectivo.</p>
+</div>
+
+<!-- Contacto -->
+<div class="container" style="margin-top: 40px;">
+    <h3 class="subtitulo" style="color: #6A1B9A; font-size: 2rem; text-align: center;">Contacto</h3>
+    <p class="texto" style="font-size: 1.2rem; font-style: italic; text-align: center;"><i class="fas fa-phone-alt"></i> Puedes contactarnos al número de teléfono <strong>809-977-7238</strong>.</p>
+</div>
+
+<!-- Instagram -->
+<div class="container" style="margin-top: 40px;">
+    <h3 class="subtitulo" style="color: #6A1B9A; font-size: 2rem; text-align: center;">Síguenos en Instagram</h3>
+    <a href="https://www.instagram.com/mejia_angelis" target="_blank" class="boton" style="display: block; text-align: center;">
+        <i class="fab fa-instagram"></i> Seguir en Instagram
+    </a>
+</div>
+
+<!-- Ubicación -->
+<div class="container" style="margin-top: 40px;">
+    <h3 class="subtitulo" style="color: #6A1B9A; font-size: 2rem; text-align: center;">Ubicación</h3>
+    <p class="texto" style="font-size: 1.2rem; font-style: italic; text-align: center;">Visítanos en nuestra dirección en Santo Domingo, República Dominicana: <strong>Calle Ficticia 123, Zona 2, Santo Domingo</strong>.</p>
+
+    <!-- Botón de Google Maps -->
+    <a href="https://www.google.com/maps?q=19.432608,-99.133209" target="_blank" class="boton" style="display: block; text-align: center;">
+        <i class="fas fa-map-marker-alt"></i> Ver Ubicación en Google Maps
+    </a>
+</div>
+
+<style>
+    .titulo {
+        color: #6A1B9A;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .subtitulo {
+        color: #9C4D97;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .texto {
+        color: #000000;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .boton {
+        font-size: 1.2rem;
+        color: white;
+        background-color: #9C4D97;
+        padding: 10px 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 20px;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+        .boton:hover {
+            background-color: #6A1B9A;
+            transform: translateY(-5px);
+        }
+
+    .card-container {
+        background-color: #FFF;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+        .card-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 10px rgba(0,0,0,0.2);
+        }
+</style>
