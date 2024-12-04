@@ -1,26 +1,29 @@
 ﻿@model IEnumerable<PsychologyConsultation.Domain.Entities.SeccionSeguimiento>
 
-<!-- Image at the Top -->
+<!-- Imagen Principal -->
 <div class="text-center" style="margin-bottom: 20px;">
     <img src="https://th.bing.com/th/id/R.075343f239d3cb090bc0c6bdce74320c?rik=i9kgEcR192ChPQ&pid=ImgRaw&r=0"
-         alt="Imagen Principal" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px;">
+         alt="Imagen Principal"
+         style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px;">
 </div>
 
-<div class="text-center" style="background-color: #F3E5F5; padding: 50px; border-radius: 10px;">
-    <!-- Title -->
-    <h1 class="titulo" style="color: #6A1B9A; font-family: 'Georgia', serif;">Lista de Secciones de Seguimiento</h1>
+<!-- Encabezado -->
+<div class="text-center" style="background-color: #6A1B9A; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+    <h1 style="color: white; font-family: 'Georgia', serif; margin: 0;">Lista de Secciones de Seguimiento</h1>
 </div>
 
-<!-- Button to Create New Sección -->
-<div class="container mt-4">
-    <p class="text-right">
-        <a href="@Url.Action("Create", "SeccionSeguimiento")" class="btn btn-primary"
-           style="background-color: #6A1B9A; border-color: #6A1B9A; color: white; font-weight: bold;">Crear Nueva Sección</a>
-    </p>
+<!-- Botón Crear Nueva Sección -->
+<div class="container text-right mb-3">
+    <a href="@Url.Action("Create", "SeccionSeguimiento")" class="btn btn-primary"
+       style="background-color: #6A1B9A; border-color: #6A1B9A; font-weight: bold;">
+        Crear Nueva Sección
+    </a>
+</div>
 
-    <!-- Sección Seguimiento Table -->
-    <table class="table table-bordered table-hover">
-        <thead style="background-color: #6A1B9A; color: white;">
+<!-- Tabla de Secciones -->
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <thead style="background-color: #6A1B9A; color: white; text-align: center;">
             <tr>
                 <th>ID</th>
                 <th>Fecha</th>
@@ -32,13 +35,13 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr style="background-color: #f9f9f9;">
-                    <td>@item.Id</td>
-                    <td>@item.Fecha?.ToString("dd/MM/yyyy") ?? "Sin Fecha"</td>
-                    <td>@item.Observaciones ?? "Sin Observaciones"</td>
-                    <td>@(item.Completada == true ? "Sí" : "No")</td>
-                    <td>
-                        <a href="@Url.Action("Edit", "SeccionSeguimiento", new { id = item.Id })" class="btn btn-warning">Editar</a>
+                <tr>
+                    <td style="text-align: center;">@item.Id</td>
+                    <td style="text-align: center;">@item.Fecha?.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Observaciones</td>
+                    <td style="text-align: center;">@(item.Completada ? "Sí" : "No")</td>
+                    <td style="text-align: center;">
+                        <a href="@Url.Action("Edit", "SeccionSeguimiento", new { id = item.Id })" class="btn btn-warning" style="margin-right: 5px;">Editar</a>
                         <a href="@Url.Action("Delete", "SeccionSeguimiento", new { id = item.Id })" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
@@ -47,26 +50,28 @@
     </table>
 </div>
 
+<!-- Estilos -->
 <style>
-    .titulo {
-        font-size: 3rem;
-        font-family: 'Arial', sans-serif;
+    .btn-primary:hover {
+        background-color: #4A148C;
+        border-color: #4A148C;
     }
 
-    .btn:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    .btn-warning:hover {
+        background-color: #FFA000;
+        border-color: #FFA000;
     }
 
-    table th {
-        text-align: center;
+    .btn-danger:hover {
+        background-color: #D32F2F;
+        border-color: #D32F2F;
     }
 
-    table td {
-        text-align: center;
+    table th, table td {
+        vertical-align: middle;
     }
 
     table tr:hover {
-        background-color: #e7e7e7;
+        background-color: #f5f5f5;
     }
 </style>

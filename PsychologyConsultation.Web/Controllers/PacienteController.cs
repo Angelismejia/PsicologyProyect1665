@@ -1,76 +1,114 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PsychologyConsultation.Domain.Entities;
+using PsychologyConsultation.Infrastructure;
+using PsychologyConsultation.Infrastructure.Data;
 
 namespace PsychologyConsultation.Web.Controllers
 {
     public class PacienteController : Controller
     {
-        private static List<Paciente> Pacientes = new List<Paciente>
-        {
-            new Paciente { Id = 1, Nombre = "Juan", Apellido = "Pérez", FechaNacimiento = new DateTime(1990, 5, 20), Telefono = "123456789", Email = "juan.perez@example.com" },
-            new Paciente { Id = 2, Nombre = "Ana", Apellido = "Gómez", FechaNacimiento = new DateTime(1985, 3, 15), Telefono = "987654321", Email = "ana.gomez@example.com" }
-        };
+        private readonly ApplicationDbContext _context;
 
-        public IActionResult Index()
+        public PacienteController(ApplicationDbContext context)
         {
-            return View(Pacientes);
+            _context = context;
         }
 
-        public IActionResult Details(int id)
+        // Listar todos los pacientes
+        public async Task<IActionResult> Index()
         {
-            var paciente = Pacientes.FirstOrDefault(p => p.Id == id);
+            var pacientes = await _context.Pacientes.ToListAsync();
+            return View(pacientes);
+        }
+
+        // Detalles de un paciente específico
+        public async Task<IActionResult> Details(int id)
+        {
+            var paciente = await _context.Pacientes.FindAsync(id);
             if (paciente == null) return NotFound();
             return View(paciente);
         }
 
+        // Crear un nuevo paciente (Formulario)
         public IActionResult Create()
         {
             return View();
         }
 
+        // Crear un nuevo paciente (Guardar en BD)
         [HttpPost]
-        public IActionResult Create(Paciente paciente)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Paciente paciente)
         {
-            paciente.Id = Pacientes.Count + 1;
-            Pacientes.Add(paciente);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _context.Pacientes.Add(paciente);
+                await _context.SaveChangesAsync(); // Guarda los cambios en la base de datos
+                return RedirectToAction(nameof(Index));
+            }
+            return View(paciente);
         }
 
-        public IActionResult Edit(int id)
+        // Editar un paciente existente (Formulario)
+        public async Task<IActionResult> Edit(int id)
         {
-            var paciente = Pacientes.FirstOrDefault(p => p.Id == id);
+            var paciente = await _context.Pacientes.FindAsync(id);
             if (paciente == null) return NotFound();
             return View(paciente);
         }
 
+        // Editar un paciente existente (Guardar cambios)
         [HttpPost]
-        public IActionResult Edit(Paciente paciente)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Paciente paciente)
         {
-            var existing = Pacientes.FirstOrDefault(p => p.Id == paciente.Id);
-            if (existing == null) return NotFound();
+            if (id != paciente.Id) return BadRequest();
 
-            existing.Nombre = paciente.Nombre;
-            existing.Apellido = paciente.Apellido;
-            existing.FechaNacimiento = paciente.FechaNacimiento;
-            existing.Telefono = paciente.Telefono;
-            existing.Email = paciente.Email;
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(paciente);
+                    await _context.SaveChangesAsync(); // Guarda los cambios en la base de datos
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PacienteExists(paciente.Id))
+                        return NotFound();
+                    else
+                        throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(paciente);
         }
 
-        public IActionResult Delete(int id)
+        // Eliminar un paciente existente (Formulario)
+        public async Task<IActionResult> Delete(int id)
         {
-            var paciente = Pacientes.FirstOrDefault(p => p.Id == id);
+            var paciente = await _context.Pacientes.FindAsync(id);
             if (paciente == null) return NotFound();
             return View(paciente);
         }
 
+        // Eliminar un paciente existente (Confirmación)
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var paciente = Pacientes.FirstOrDefault(p => p.Id == id);
-            if (paciente != null) Pacientes.Remove(paciente);
-            return RedirectToAction("Index");
+            var paciente = await _context.Pacientes.FindAsync(id);
+            if (paciente != null)
+            {
+                _context.Pacientes.Remove(paciente);
+                await _context.SaveChangesAsync(); // Guarda los cambios en la base de datos
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool PacienteExists(int id)
+        {
+            return _context.Pacientes.Any(e => e.Id == id);
         }
     }
 }

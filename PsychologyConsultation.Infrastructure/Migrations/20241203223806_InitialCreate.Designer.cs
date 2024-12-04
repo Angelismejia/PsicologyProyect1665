@@ -12,8 +12,8 @@ using PsychologyConsultation.Infrastructure.Data;
 namespace PsychologyConsultation.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241202172212_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241203223806_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,7 +61,8 @@ namespace PsychologyConsultation.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -70,7 +71,9 @@ namespace PsychologyConsultation.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
@@ -88,7 +91,7 @@ namespace PsychologyConsultation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool?>("Completada")
+                    b.Property<bool>("Completada")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Fecha")
@@ -125,7 +128,8 @@ namespace PsychologyConsultation.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -138,7 +142,8 @@ namespace PsychologyConsultation.Infrastructure.Migrations
                 {
                     b.HasOne("PsychologyConsultation.Domain.Entities.Paciente", "Paciente")
                         .WithMany("Consultas")
-                        .HasForeignKey("PacienteId");
+                        .HasForeignKey("PacienteId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Paciente");
                 });
@@ -158,7 +163,8 @@ namespace PsychologyConsultation.Infrastructure.Migrations
                 {
                     b.HasOne("PsychologyConsultation.Domain.Entities.Consulta", "Consulta")
                         .WithMany("Tratamientos")
-                        .HasForeignKey("ConsultaId");
+                        .HasForeignKey("ConsultaId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Consulta");
                 });

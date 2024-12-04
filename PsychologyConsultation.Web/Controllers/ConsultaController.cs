@@ -62,7 +62,7 @@ namespace PsychologyConsultation.Web.Controllers
             return View(consulta);
         }
 
-             // GET: Consulta/Edit/5
+        // GET: Consulta/Edit/5
         public IActionResult Edit(int id)
         {
             var consulta = _context.Consultas
