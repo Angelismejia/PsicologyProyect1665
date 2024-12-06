@@ -1,77 +1,68 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// Controllers/SeccionSeguimientoController.cs
+using Microsoft.AspNetCore.Mvc;
+using PsychologyConsultation.Application.Contract;
 using PsychologyConsultation.Application.DTOs;
-using PsychologyConsultation.Application.Interfaces;
-using System.Threading.Tasks;
 
 namespace PsychologyConsultation.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SesionesSeguimientoController : ControllerBase
+    public class SeccionSeguimientoController : ControllerBase
     {
-        private readonly ISesionSeguimientoService _sesionSeguimientoService;
+        private readonly ISeccionSeguimientoService _seccionSeguimientoService;
 
-        // Constructor con inyección de dependencias
-        public SesionesSeguimientoController(ISesionSeguimientoService sesionSeguimientoService)
+        public SeccionSeguimientoController(ISeccionSeguimientoService seccionSeguimientoService)
         {
-            _sesionSeguimientoService = sesionSeguimientoService;
+            _seccionSeguimientoService = seccionSeguimientoService;
         }
 
-        // Obtener todas las sesiones de seguimiento
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var sesiones = await _sesionSeguimientoService.GetAllSesionesAsync();
+            var sesiones = await _seccionSeguimientoService.GetAllSesionSeguimientoAsync();
             return Ok(sesiones);
         }
 
-        // Obtener una sesión de seguimiento por su Id
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var sesion = await _sesionSeguimientoService.GetSesionByIdAsync(id);
+            var sesion = await _seccionSeguimientoService.GetSesionSeguimientoByIdAsync(id);
             if (sesion == null)
-                return NotFound(); // Si no se encuentra, devuelve NotFound
-
+                return NotFound();
             return Ok(sesion);
         }
 
-        // Crear una nueva sesión de seguimiento
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] SesionSeguimientoDto sesionDto)
+        public async Task<IActionResult> Create([FromBody] SeccionSeguimientoDto seccionSeguimientoDto)
         {
-            if (sesionDto == null)
-                return BadRequest(); // Verifica que el cuerpo no esté vacío
+            if (seccionSeguimientoDto == null)
+                return BadRequest();
 
-            var sesionCreada = await _sesionSeguimientoService.AddSesionAsync(sesionDto);
-
-            // Devuelve el resultado creado con el código HTTP 201
+            var sesionCreada = await _seccionSeguimientoService.AddSesionSeguimientoAsync(seccionSeguimientoDto);
             return CreatedAtAction(nameof(GetById), new { id = sesionCreada.Id }, sesionCreada);
         }
 
-        // Actualizar una sesión de seguimiento
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] SesionSeguimientoDto sesionDto)
+        public async Task<IActionResult> Update(int id, [FromBody] SeccionSeguimientoDto seccionSeguimientoDto)
         {
-            if (sesionDto == null)
+            if (seccionSeguimientoDto == null)
                 return BadRequest();
 
-            var sesionActualizada = await _sesionSeguimientoService.UpdateSesionAsync(id, sesionDto);
+            var sesionActualizada = await _seccionSeguimientoService.UpdateSesionSeguimientoAsync(id, seccionSeguimientoDto);
             if (sesionActualizada == null)
-                return NotFound(); // Si no existe la sesión, devuelve NotFound
+                return NotFound();
 
-            return NoContent(); // Si todo va bien, devuelve NoContent
+            return NoContent();
         }
 
-        // Eliminar una sesión de seguimiento
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _sesionSeguimientoService.DeleteSesionAsync(id);
+            var result = await _seccionSeguimientoService.DeleteSesionSeguimientoAsync(id);
             if (!result)
-                return NotFound(); // Si no se encuentra, devuelve NotFound
+                return NotFound();
 
-            return NoContent(); // Si se eliminó correctamente, devuelve NoContent
+            return NoContent();
         }
     }
 }

@@ -1,53 +1,59 @@
-﻿using PsychologyConsultation.Application.Contract;
+﻿// Service/ConsultaService.cs
+using PsychologyConsultation.Application.Contract;
 using PsychologyConsultation.Application.DTOs;
+using PsychologyConsultation.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologyConsultation.Application.Service
 {
-    public class PacienteService : IPacienteService
+    public class ConsultaService : IConsultaService
     {
-        private readonly List<PacienteDto> _pacientes = new(); // Simulación de base de datos
+        // Simulamos una base de datos en memoria para este ejemplo
+        private readonly List<ConsultaDto> _consultas = new List<ConsultaDto>();
 
-        public async Task<IEnumerable<PacienteDto>> GetAllAsync()
+        public async Task<IEnumerable<ConsultaDto>> GetAllConsultasAsync()
         {
-            return _pacientes;
+            return await Task.FromResult(_consultas);
         }
 
-        public async Task<PacienteDto> GetByIdAsync(int id)
+        public async Task<ConsultaDto> GetConsultaByIdAsync(int id)
         {
-            return _pacientes.FirstOrDefault(p => p.Id == id);
+            var consulta = _consultas.FirstOrDefault(c => c.Id == id);
+            return await Task.FromResult(consulta);
         }
 
-        public async Task<PacienteDto> CreateAsync(PacienteDto pacienteDto)
+        public async Task<ConsultaDto> AddConsultaAsync(ConsultaDto consultaDto)
         {
-            pacienteDto.Id = _pacientes.Count + 1;
-            _pacientes.Add(pacienteDto);
-            return pacienteDto;
+            consultaDto.Id = _consultas.Max(c => c.Id ?? 0) + 1; // Generar un ID único
+            _consultas.Add(consultaDto);
+            return await Task.FromResult(consultaDto);
         }
 
-        public async Task<PacienteDto> UpdateAsync(int id, PacienteDto pacienteDto)
+        public async Task<ConsultaDto> UpdateConsultaAsync(int id, ConsultaDto consultaDto)
         {
-            var paciente = _pacientes.FirstOrDefault(p => p.Id == id);
-            if (paciente == null) return null;
-
-            paciente.Nombre = pacienteDto.Nombre;
-            paciente.Apellido = pacienteDto.Apellido;
-            paciente.Telefono = pacienteDto.Telefono;
-            paciente.Email = pacienteDto.Email;
-            paciente.FechaNacimiento = pacienteDto.FechaNacimiento;
-
-            return paciente;
+            var existingConsulta = _consultas.FirstOrDefault(c => c.Id == id);
+            if (existingConsulta != null)
+            {
+                existingConsulta.Fecha = consultaDto.Fecha;
+                existingConsulta.Detalles = consultaDto.Detalles;
+                existingConsulta.Estado = consultaDto.Estado;
+                existingConsulta.PacienteId = consultaDto.PacienteId;
+                existingConsulta.TratamientoIds = consultaDto.TratamientoIds;
+            }
+            return await Task.FromResult(existingConsulta);
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteConsultaAsync(int id)
         {
-            var paciente = _pacientes.FirstOrDefault(p => p.Id == id);
-            if (paciente == null) return false;
-
-            _pacientes.Remove(paciente);
-            return true;
+            var consulta = _consultas.FirstOrDefault(c => c.Id == id);
+            if (consulta != null)
+            {
+                _consultas.Remove(consulta);
+                return await Task.FromResult(true);
+            }
+            return await Task.FromResult(false);
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿using PsychologyConsultation.Application.DTOs;
+﻿// Contract/IConsultaService.cs
+using PsychologyConsultation.Application.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PsychologyConsultation.Application.Interfaces
+namespace PsychologyConsultation.Application.Contract
 {
     public interface IConsultaService
     {

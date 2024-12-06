@@ -1,10 +1,16 @@
-﻿using PsychologyConsultation.Application.DTOs;
+﻿// Contract/IPacienteService.cs
+using PsychologyConsultation.Application.DTOs;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-public interface IPacienteService
+namespace PsychologyConsultation.Application.Contract
 {
-    Task<IEnumerable<PacienteDto>> GetAllAsync();
-    Task<PacienteDto> GetByIdAsync(int id);
-    Task<PacienteDto> CreateAsync(PacienteDto pacienteDto);
-    Task<PacienteDto> UpdateAsync(int id, PacienteDto pacienteDto);
-    Task<bool> DeleteAsync(int id);
+    public interface IPacienteService
+    {
+        Task<IEnumerable<PacienteDto>> GetAllPacientesAsync();
+        Task<PacienteDto> GetPacienteByIdAsync(int id);
+        Task<PacienteDto> AddPacienteAsync(PacienteDto pacienteDto);
+        Task<PacienteDto> UpdatePacienteAsync(int id, PacienteDto pacienteDto);
+        Task<bool> DeletePacienteAsync(int id);
+    }
 }

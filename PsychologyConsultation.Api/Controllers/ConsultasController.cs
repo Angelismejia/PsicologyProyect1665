@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// Controllers/ConsultaController.cs
+using Microsoft.AspNetCore.Mvc;
+using PsychologyConsultation.Application.Contract;
 using PsychologyConsultation.Application.DTOs;
-using PsychologyConsultation.Application.Interfaces;
 
-namespace PsychologyConsultation.Api.Controllers
+namespace PsychologyConsultation.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -16,44 +17,49 @@ namespace PsychologyConsultation.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ConsultaDto>>> GetAllConsultas()
+        public async Task<IActionResult> GetAll()
         {
             var consultas = await _consultaService.GetAllConsultasAsync();
             return Ok(consultas);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ConsultaDto>> GetConsultaById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var consulta = await _consultaService.GetConsultaByIdAsync(id);
             if (consulta == null)
                 return NotFound();
-
             return Ok(consulta);
         }
 
         [HttpPost]
-        public async Task<ActionResult<ConsultaDto>> CreateConsulta(ConsultaDto consultaDto)
+        public async Task<IActionResult> Create([FromBody] ConsultaDto consultaDto)
         {
-            var consulta = await _consultaService.AddConsultaAsync(consultaDto);
-            return CreatedAtAction(nameof(GetConsultaById), new { id = consulta.Id }, consulta);
+            if (consultaDto == null)
+                return BadRequest();
+
+            var consultaCreada = await _consultaService.AddConsultaAsync(consultaDto);
+            return CreatedAtAction(nameof(GetById), new { id = consultaCreada.Id }, consultaCreada);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ConsultaDto>> UpdateConsulta(int id, ConsultaDto consultaDto)
+        public async Task<IActionResult> Update(int id, [FromBody] ConsultaDto consultaDto)
         {
-            var updatedConsulta = await _consultaService.UpdateConsultaAsync(id, consultaDto);
-            if (updatedConsulta == null)
+            if (consultaDto == null)
+                return BadRequest();
+
+            var consultaActualizada = await _consultaService.UpdateConsultaAsync(id, consultaDto);
+            if (consultaActualizada == null)
                 return NotFound();
 
-            return Ok(updatedConsulta);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteConsulta(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var success = await _consultaService.DeleteConsultaAsync(id);
-            if (!success)
+            var result = await _consultaService.DeleteConsultaAsync(id);
+            if (!result)
                 return NotFound();
 
             return NoContent();

@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Dtos/SeccionSeguimientoDto.cs
+using System;
 
 namespace PsychologyConsultation.Application.DTOs
 {
-    public class SesionSeguimientoDto
+    public class SeccionSeguimientoDto
     {
-        public int Id { get; set; }
-        public int TratamientoId { get; set; }
-        public DateTime FechaSesion { get; set; }
+        public int? Id { get; set; }
+        public DateTime? Fecha { get; set; }
         public string? Observaciones { get; set; }
-        public string? EstadoPaciente { get; set; }
+        public bool Completada { get; set; }
+        public int TratamientoId { get; set; }
     }
 }

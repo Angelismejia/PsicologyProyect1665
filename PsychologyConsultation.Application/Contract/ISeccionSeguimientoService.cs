@@ -1,15 +1,16 @@
-﻿using PsychologyConsultation.Application.DTOs;
+﻿// Contract/ISeccionSeguimientoService.cs
+using PsychologyConsultation.Application.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PsychologyConsultation.Application.Interfaces
+namespace PsychologyConsultation.Application.Contract
 {
-    public interface ISesionSeguimientoService
+    public interface ISeccionSeguimientoService
     {
-        Task<IEnumerable<SesionSeguimientoDto>> GetAllSesionesAsync();
-        Task<SesionSeguimientoDto> GetSesionByIdAsync(int id);
-        Task<SesionSeguimientoDto> AddSesionAsync(SesionSeguimientoDto sesionDto);
-        Task<SesionSeguimientoDto> UpdateSesionAsync(int id, SesionSeguimientoDto sesionDto);
-        Task<bool> DeleteSesionAsync(int id);
+        Task<IEnumerable<SeccionSeguimientoDto>> GetAllSesionSeguimientoAsync();
+        Task<SeccionSeguimientoDto> GetSesionSeguimientoByIdAsync(int id);
+        Task<SeccionSeguimientoDto> AddSesionSeguimientoAsync(SeccionSeguimientoDto sesionSeguimientoDto);
+        Task<SeccionSeguimientoDto> UpdateSesionSeguimientoAsync(int id, SeccionSeguimientoDto sesionSeguimientoDto);
+        Task<bool> DeleteSesionSeguimientoAsync(int id);
     }
 }

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Dtos/TratamientoDto.cs
+using System;
 
 namespace PsychologyConsultation.Application.DTOs
 {
     public class TratamientoDto
     {
-        public int Id { get; set; }
-        public int ConsultaId { get; set; }
-        public string? NombreTratamiento { get; set; }
+        public int? Id { get; set; }
+        public string? Nombre { get; set; }
         public string? Descripcion { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
-        public bool EstaActivo { get; set; }
+        public int? DuracionDias { get; set; }
+        public int? ConsultaId { get; set; }
     }
 }
