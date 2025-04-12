@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyConsultation.Domain", "PsychologyConsultation.Domain.csproj", "{A39AB42E-C768-4345-83DA-37035E4E1A6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PsychologyConsultation.Domain", "PsychologyConsultation.Domain.csproj", "{A39AB42E-C768-4345-83DA-37035E4E1A6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyConsultation.Infrastructure", "..\PsychologyConsultation.Infrastructure\PsychologyConsultation.Infrastructure.csproj", "{206ADD3C-FEC9-4BAC-83A3-743C768BE366}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PsychologyConsultation.Infrastructure", "..\PsychologyConsultation.Infrastructure\PsychologyConsultation.Infrastructure.csproj", "{206ADD3C-FEC9-4BAC-83A3-743C768BE366}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyConsultation.Application", "..\PsychologyConsultation.Application\PsychologyConsultation.Application.csproj", "{A114ABBA-21E1-4EFA-885C-30DD5FF11D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PsychologyConsultation.Application", "..\PsychologyConsultation.Application\PsychologyConsultation.Application.csproj", "{A114ABBA-21E1-4EFA-885C-30DD5FF11D5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyConsultation.Web", "..\PsychologyConsultation.Web\PsychologyConsultation.Web.csproj", "{458F7E4C-7B62-4FE9-A7FD-4373C76034AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PsychologyConsultation.Web", "..\PsychologyConsultation.Web\PsychologyConsultation.Web.csproj", "{458F7E4C-7B62-4FE9-A7FD-4373C76034AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyConsultation.Api", "..\PsychologyConsultation.Api\PsychologyConsultation.Api.csproj", "{0249143B-6AAF-4183-9EB6-2588FB147BD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PsychologyConsultation.Api", "..\PsychologyConsultation.Api\PsychologyConsultation.Api.csproj", "{0249143B-6AAF-4183-9EB6-2588FB147BD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTest", "..\SeleniumTest\SeleniumTest.csproj", "{29D57F06-F990-4E55-A720-D77B336B4B95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0249143B-6AAF-4183-9EB6-2588FB147BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0249143B-6AAF-4183-9EB6-2588FB147BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0249143B-6AAF-4183-9EB6-2588FB147BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D57F06-F990-4E55-A720-D77B336B4B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D57F06-F990-4E55-A720-D77B336B4B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D57F06-F990-4E55-A720-D77B336B4B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D57F06-F990-4E55-A720-D77B336B4B95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

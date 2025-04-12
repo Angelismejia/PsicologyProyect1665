@@ -98,10 +98,11 @@ namespace PsychologyConsultation.Web.Controllers
             var tratamiento = _context.Tratamientos.Find(id);
             if (tratamiento == null) return NotFound();
 
+            // Eliminar el tratamiento de la base de datos
             _context.Tratamientos.Remove(tratamiento);
             _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction(nameof(Index)); // Redirige al listado de tratamientos
         }
     }
 }
-

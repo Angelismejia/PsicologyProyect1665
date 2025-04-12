@@ -13,7 +13,7 @@
 <h4>@Model.Nombre</h4>
 <p>@Model.Descripcion</p>
 
-<form asp-action="Delete" method="post">
+<form asp-action="DeleteConfirmed" method="post">
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-danger">Eliminar</button>
     <a href="@Url.Action("Index", "Tratamiento")" class="btn btn-secondary">Cancelar</a>
